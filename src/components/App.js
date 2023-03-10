@@ -3,6 +3,8 @@ import "../index.css";
 import Header from "./header.js";
 import Main from "./main.js";
 import Footer from "./footer.js";
+import PopupWithForm from "./PopupWithForm.js";
+import ImagePopup from "./ImagePopup.js";
 
 function App() {
   return (
@@ -10,105 +12,85 @@ function App() {
       <div className="container">
         <Header />
         <Main />
+        <ImagePopup card={selectedCard}></ImagePopup>
 
-        {/* EDIT POPUP */}
-        <div className="popup popup_type_edit">
-          <div className="popup__container">
-            <button className="popup__close" type="button"></button>
-            <h2 className="popup__title">Редактировать профиль</h2>
-            <form
-              className="popup__form popup__edit-form"
-              name="edit-form"
-              novalidate>
-              <input
-                className="popup__input popup__input_type_name"
-                type="text"
-                name="name"
-                id="inputName"
-                placeholder="Имя"
-                minlength="2"
-                maxlength="40"
-                required
-              />
-              <span className="inputName-error popup__input-error"></span>
-              <input
-                className="popup__input popup__input_type_job"
-                type="text"
-                name="about"
-                id="inputJob"
-                placeholder="О себе"
-                minlength="2"
-                maxlength="200"
-                required
-              />
-              <span className="inputJob-error popup__input-error"></span>
-              <button className="popup__save" type="submit">
-                Сохранить
-              </button>
-            </form>
-          </div>
-        </div>
+        {/* POPUP EDIT PROFILE */}
+        <PopupWithForm
+          name="profile"
+          title="Редактировать профиль"
+          buttonText="Сохранить">
+          <input
+            className="popup__input popup__input_type_name"
+            type="text"
+            name="name"
+            id="inputName"
+            placeholder="Имя"
+            minLength="2"
+            maxLength="40"
+            required
+          />
+          <span className="inputName-error popup__input-error"></span>
+          <input
+            className="popup__input popup__input_type_job"
+            type="text"
+            name="about"
+            id="inputJob"
+            placeholder="О себе"
+            minLength="2"
+            maxLength="200"
+            required
+          />
+          <span className="inputJob-error popup__input-error"></span>
+        </PopupWithForm>
 
         {/* RENEW AVATAR POPUP */}
-        <section className="popup popup_type_avatar">
-          <div className="popup__container">
-            <button className="popup__close" type="button"></button>
-            <h2 className="popup__title">Обновить аватар</h2>
-            <form
-              className="popup__form popup__avatar-form"
-              name="avatar-form"
-              novalidate>
-              <input
-                className="popup__input popup__input_type_avatar-link"
-                type="url"
-                name="avatar"
-                id="inputAvatarLink"
-                placeholder="Ссылка на картинку"
-                required
-              />
-              <span className="inputAvatarLink-error popup__input-error"></span>
-              <button className="popup__save" type="submit">
-                Сохранить
-              </button>
-            </form>
-          </div>
-        </section>
+        <PopupWithForm
+          name="avatar"
+          title="Обновить аватар"
+          buttonText="Сохранить">
+          <input
+            className="popup__input popup__input_type_avatar-link"
+            type="url"
+            name="avatar"
+            id="inputAvatarLink"
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <span className="inputAvatarLink-error popup__input-error"></span>
+        </PopupWithForm>
 
         {/* ADD POPUP */}
-        <section className="popup popup_type_add">
-          <div className="popup__container">
-            <button className="popup__close" type="button"></button>
-            <h2 className="popup__title">Новое место</h2>
-            <form
-              className="popup__form popup__add-form"
-              name="add-form"
-              novalidate>
-              <input
-                className="popup__input popup__input_type_place"
-                type="text"
-                name="name"
-                id="inputPlace"
-                placeholder="Название"
-                minlength="2"
-                maxlength="30"
-                required
-              />
-              <span className="inputPlace-error popup__input-error"></span>
-              <input
-                className="popup__input popup__input_type_place-link"
-                type="url"
-                name="link"
-                id="inputPlaceLink"
-                placeholder="Ссылка на картинку"
-                required
-              />
-              <span className="inputPlaceLink-error popup__input-error"></span>
-              <button className="popup__save" type="submit">
-                Сохранить
-              </button>
-            </form>
-          </div>
-        </section>
+        <PopupWithForm
+          name="add-card"
+          title="Новое место"
+          buttonText="Сохранить">
+          <input
+            className="popup__input popup__input_type_place"
+            type="text"
+            name="name"
+            id="inputPlace"
+            placeholder="Название"
+            minLength="2"
+            maxLength="30"
+            required
+          />
+          <span className="inputPlace-error popup__input-error"></span>
+          <input
+            className="popup__input popup__input_type_place-link"
+            type="url"
+            name="link"
+            id="inputPlaceLink"
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <span className="inputPlaceLink-error popup__input-error"></span>
+        </PopupWithForm>
+
+        {/* DELETE CARD POPUP */}
+        <PopupWithForm
+          name="delete-card"
+          title="Вы уверены?"
+          buttonText="Да"></PopupWithForm>
 
         {/* PREVIEW IMAGE POPUP */}
         <section className="popup popup_type_preview">
@@ -117,21 +99,6 @@ function App() {
             <img className="popup__preview-image" src="#" alt="" />
             <figcaption className="popup__preview-title"></figcaption>
           </figure>
-        </section>
-
-        {/* DELETE CARD POPUP */}
-        <section className="popup popup_type_delete-card">
-          <div className="popup__container popup__container_type_delete-card">
-            <button className="popup__close" type="button"></button>
-            <h2 className="popup__title">Вы уверены?</h2>
-            <form className="popup__form" name="delete-card" action="">
-              <button
-                className="popup__save popup__save_button_delete-card"
-                type="submit">
-                Да
-              </button>
-            </form>
-          </div>
         </section>
 
         {/* TEMPLATE CARD */}
