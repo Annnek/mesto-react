@@ -2,22 +2,8 @@ import React from "react";
 import "../index.css";
 import avatarProfile from "../images/avatarProfile.jpg";
 
-function Main() {
-  const handleEditAvatarClick = () => {
-    const popupEditAvatar = document.querySelector(".popup_type_avatar");
-    popupEditAvatar.classList.add("popup_opened");
-  };
-
-  const handleEditProfileClick = () => {
-    const popupEditProfile = document.querySelector(".popup_type_profile");
-    popupEditProfile.classList.add("popup_opened");
-  };
-
-  const handleAddPlaceClick = () => {
-    const popupAddPlace = document.querySelector(".popup_type_add-card");
-    popupAddPlace.classList.add("popup_opened");
-  };
-
+function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+  //onEditProfile, onAddPlace, onEditAvatar - вызов соответствующих функций из переданных пропсов
   return (
     <main className="content">
       <section className="profile">
@@ -25,7 +11,7 @@ function Main() {
           <button
             className="profile__button-edit-avatar"
             type="button"
-            onClick={handleEditAvatarClick}>
+            onClick={onEditAvatar}>
             <img
               className="profile__avatar"
               src={avatarProfile}
@@ -37,14 +23,14 @@ function Main() {
             <button
               className="profile__button-edit"
               type="button"
-              onClick={handleEditProfileClick}></button>
+              onClick={onEditProfile}></button>
             <h2 className="profile__subtitle overflow">Исследователь океана</h2>
           </div>
         </div>
         <button
           className="profile__button-add"
           type="button"
-          onClick={handleAddPlaceClick}></button>
+          onClick={onAddPlace}></button>
       </section>
       <section className="elements">
         <ul className="card"></ul>

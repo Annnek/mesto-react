@@ -7,18 +7,42 @@ import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 
 function App() {
+  //три переменные состояния и три функции, которые будут менять их значения
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
+    React.useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+
+  const handleEditProfileClick = () => {
+    setEditProfilePopupOpen(true);
+  };
+
+  const handleAddPlaceClick = () => {
+    setAddPlacePopupOpen(true);
+  };
+  const handleEditAvatarClick = () => {
+    setEditAvatarPopupOpen(true);
+  };
+
   return (
     <div className="page">
       <div className="container">
         <Header />
-        <Main />
-        <ImagePopup card={selectedCard}></ImagePopup>
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+        />
+
+        {/* PREVIEW IMAGE POPUP */}
+        <ImagePopup></ImagePopup>
 
         {/* POPUP EDIT PROFILE */}
         <PopupWithForm
           name="profile"
           title="Редактировать профиль"
-          buttonText="Сохранить">
+          buttonText="Сохранить"
+          isOpen={isEditProfilePopupOpen}>
           <input
             className="popup__input popup__input_type_name"
             type="text"
@@ -47,7 +71,8 @@ function App() {
         <PopupWithForm
           name="avatar"
           title="Обновить аватар"
-          buttonText="Сохранить">
+          buttonText="Сохранить"
+          isOpen={isEditAvatarPopupOpen}>
           <input
             className="popup__input popup__input_type_avatar-link"
             type="url"
@@ -63,7 +88,8 @@ function App() {
         <PopupWithForm
           name="add-card"
           title="Новое место"
-          buttonText="Сохранить">
+          buttonText="Сохранить"
+          isOpen={isAddPlacePopupOpen}>
           <input
             className="popup__input popup__input_type_place"
             type="text"
@@ -91,15 +117,6 @@ function App() {
           name="delete-card"
           title="Вы уверены?"
           buttonText="Да"></PopupWithForm>
-
-        {/* PREVIEW IMAGE POPUP */}
-        <section className="popup popup_type_preview">
-          <figure className="popup__preview-container">
-            <button className="popup__close" type="button"></button>
-            <img className="popup__preview-image" src="#" alt="" />
-            <figcaption className="popup__preview-title"></figcaption>
-          </figure>
-        </section>
 
         {/* TEMPLATE CARD */}
         <template id="card-template">
