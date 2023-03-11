@@ -24,6 +24,12 @@ function App() {
     setEditAvatarPopupOpen(true);
   };
 
+  const closeAllPopups = () => {
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+    setEditAvatarPopupOpen(false);
+  };
+
   return (
     <div className="page">
       <div className="container">
@@ -42,7 +48,8 @@ function App() {
           name="profile"
           title="Редактировать профиль"
           buttonText="Сохранить"
-          isOpen={isEditProfilePopupOpen}>
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}>
           <input
             className="popup__input popup__input_type_name"
             type="text"
@@ -72,7 +79,8 @@ function App() {
           name="avatar"
           title="Обновить аватар"
           buttonText="Сохранить"
-          isOpen={isEditAvatarPopupOpen}>
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}>
           <input
             className="popup__input popup__input_type_avatar-link"
             type="url"
@@ -89,7 +97,8 @@ function App() {
           name="add-card"
           title="Новое место"
           buttonText="Сохранить"
-          isOpen={isAddPlacePopupOpen}>
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}>
           <input
             className="popup__input popup__input_type_place"
             type="text"
