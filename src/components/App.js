@@ -5,6 +5,7 @@ import Main from "./main.js";
 import Footer from "./footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
+import api from "../utils/Api.js";
 
 function App() {
   //три переменные состояния и три функции, которые будут менять их значения
