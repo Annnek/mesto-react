@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# Проект Mesto - учебный проект в рамках курса Веб разработчик
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Основной стек технологий: HTML + CSS + JS + React + БЭМ
+
+Результат можно посмотреть по ссылке: https://annnek.github.io/mesto/
+
+Предыдущая версия проекта (без реакта) выложена: https://github.com/Annnek/mesto
+
+<!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -67,4 +73,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
