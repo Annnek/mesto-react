@@ -2,7 +2,7 @@
 
 Основной стек технологий: HTML + CSS + JS + React + БЭМ
 
-Результат можно посмотреть по ссылке: https://annnek.github.io/mesto/
+Результат можно посмотреть по ссылке: https://annnek.github.io/mesto-react/
 
 Предыдущая версия проекта (без реакта) выложена: https://github.com/Annnek/mesto
 
