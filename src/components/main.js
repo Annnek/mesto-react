@@ -4,7 +4,7 @@ import defaultAvatar from "../images/avatarProfile.jpg";
 import api from "../utils/Api.js";
 import Card from "./Card.js";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, handleCardClick }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [userName, setUserName] = React.useState("Жак-Ив Кусто");
   const [userDescription, setUserDescription] =
     React.useState("Путешественник");
@@ -70,7 +70,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, handleCardClick }) {
       <section className="elements">
         <ul className="card">
           {cards.map((card) => (
-            <Card key={card.id} card={card} onCardClick={handleCardClick} />
+            <Card key={card.id} card={card} onCardClick={onCardClick} />
           ))}
         </ul>
       </section>
