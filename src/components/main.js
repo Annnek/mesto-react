@@ -2,12 +2,16 @@ import React from "react";
 import "../index.css";
 import defaultAvatar from "../images/avatarProfile.jpg";
 import api from "../utils/Api.js";
+import Card from "./Card.js";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
+function Main({ onEditProfile, onAddPlace, onEditAvatar, handleCardClick }) {
   const [userName, setUserName] = React.useState("Жак-Ив Кусто");
   const [userDescription, setUserDescription] =
     React.useState("Путешественник");
   const [userAvatar, setUserAvatar] = React.useState(defaultAvatar);
+
+  const [cards, setCards] = React.useState([]);
+  // const [isLoading, setIsLoading] = React.useState(false); отслеживаем загрузку карточек
 
   React.useEffect(() => {
     api
@@ -17,6 +21,17 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
         setUserName(res.name);
         setUserDescription(res.about);
         setUserAvatar(res.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    api
+      .getInitialCards()
+      .then((res) => {
+        setCards(res);
       })
       .catch((err) => {
         console.log(err);
@@ -53,7 +68,11 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar }) {
           onClick={onAddPlace}></button>
       </section>
       <section className="elements">
-        <ul className="card"></ul>
+        <ul className="card">
+          {cards.map((card) => (
+            <Card key={card.id} card={card} onCardClick={handleCardClick} />
+          ))}
+        </ul>
       </section>
     </main>
   );

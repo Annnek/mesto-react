@@ -5,7 +5,6 @@ import Main from "./main.js";
 import Footer from "./footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
-import api from "../utils/Api.js";
 
 function App() {
   //три переменные состояния и три функции, которые будут менять их значения
@@ -13,6 +12,7 @@ function App() {
     React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState();
 
   const handleEditProfileClick = () => {
     setEditProfilePopupOpen(true);
@@ -25,10 +25,15 @@ function App() {
     setEditAvatarPopupOpen(true);
   };
 
+  const handleCardClick = () => {
+    setSelectedCard(true);
+  };
+
   const closeAllPopups = () => {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
+    setSelectedCard(false);
   };
 
   return (
@@ -42,7 +47,10 @@ function App() {
         />
 
         {/* PREVIEW IMAGE POPUP */}
-        <ImagePopup></ImagePopup>
+        <ImagePopup
+          card={selectedCard}
+          isOpen={handleCardClick}
+          onClose={closeAllPopups}></ImagePopup>
 
         {/* POPUP EDIT PROFILE */}
         <PopupWithForm
@@ -127,21 +135,6 @@ function App() {
           name="delete-card"
           title="Вы уверены?"
           buttonText="Да"></PopupWithForm>
-
-        {/* TEMPLATE CARD */}
-        <template id="card-template">
-          <li className="card__item">
-            <button className="card__trash"></button>
-            <img className="card__image" src="#" alt="" />
-            <div className="card__name">
-              <h2 className="card__title overflow"></h2>
-              <div>
-                <button className="card__like-icon" type="button"></button>
-                <div className="card__like-counter"></div>
-              </div>
-            </div>
-          </li>
-        </template>
 
         <Footer />
       </div>

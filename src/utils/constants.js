@@ -16,12 +16,3 @@ export const buttonEditAvatar = document.querySelector(
 export const profileName = document.querySelector(".profile__title");
 export const profileAbout = document.querySelector(".profile__subtitle");
 export const profileAvatar = document.querySelector(".profile__avatar");
-
-//config
-export const configApi = {
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-60",
-  headers: {
-    authorization: "332cdff8-dddc-4d5c-ae62-82417a8b0fdc",
-    "Content-Type": "application/json",
-  },
-};
