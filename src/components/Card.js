@@ -11,7 +11,7 @@ function Card({ card }) {
           <h2 className="card__title overflow">{card.name}</h2>
           <div>
             <button className="card__like-icon" type="button"></button>
-            <div className="card__like-counter">{card.likes.amount}</div>
+            <div className="card__like-counter">{card.likes.length}</div>
           </div>
         </div>
       </li>
