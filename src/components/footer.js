@@ -4,7 +4,10 @@ import "../index.css";
 function Footer() {
   return (
     <footer className="footer">
-      <h2 className="footer__title">© 2022 Mesto Russia</h2>
+      {/* динамическое обновление года в футере */}
+      <h2 className="footer__title">
+        © {new Date().getFullYear()} Mesto Russia
+      </h2>
     </footer>
   );
 }

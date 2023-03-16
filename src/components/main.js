@@ -70,7 +70,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       <section className="elements">
         <ul className="card">
           {cards.map((card) => (
-            <Card key={card.id} card={card} onCardClick={onCardClick} />
+            <Card key={card._id} card={card} onCardClick={onCardClick} />
           ))}
         </ul>
       </section>
