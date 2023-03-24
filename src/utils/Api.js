@@ -15,7 +15,7 @@ class Api {
   }
 
   // Метод загрузки информации о пользователе с сервера
-  async getUserProfile() {
+  async getUserInfo() {
     const response = await fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     });

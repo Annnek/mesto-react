@@ -5,6 +5,7 @@ import Main from "./main.js";
 import Footer from "./footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
+import api from "../utils/Api.js";
 
 function App() {
   //три переменные состояния и три функции, которые будут менять их значения
@@ -13,6 +14,22 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState();
+
+  React.useEffect(() => {
+    api
+      .getUserInfo()
+      .then((res) => {
+        //мы вызываем функции-сеттеры (set...) с помощью новых значений, которые мы получаем из ответа API
+        setCurrentUser(res);
+        setCurrentUserName(res.name);
+        setCurrentUserDescription(res.about);
+        setCurrentUserAvatar(res.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleEditProfileClick = () => {
     setEditProfilePopupOpen(true);
