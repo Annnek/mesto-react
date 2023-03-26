@@ -1,31 +1,35 @@
 import React from "react";
 import "../index.css";
-import defaultAvatar from "../images/avatarProfile.jpg";
+// import defaultAvatar from "../images/avatarProfile.jpg";
 import api from "../utils/Api.js";
 import Card from "./Card.js";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [userName, setUserName] = React.useState("Жак-Ив Кусто");
-  const [userDescription, setUserDescription] =
-    React.useState("Путешественник");
-  const [userAvatar, setUserAvatar] = React.useState(defaultAvatar);
+  // const [userName, setUserName] = React.useState("Жак-Ив Кусто");
+  // const [userDescription, setUserDescription] =
+  //   React.useState("Путешественник");
+  // const [userAvatar, setUserAvatar] = React.useState(defaultAvatar);
 
   const [cards, setCards] = React.useState([]);
   // const [isLoading, setIsLoading] = React.useState(false); отслеживаем загрузку карточек
 
-  React.useEffect(() => {
-    api
-      .getUserProfile()
-      .then((res) => {
-        //мы вызываем функции-сеттеры (set...) с помощью новых значений, которые мы получаем из ответа API
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // Подписываемся на контекст CurrentUserContext
+  const currentUser = React.useContext(CurrentUserContext);
+
+  // React.useEffect(() => {
+  //   api
+  //     .getUserInfo()
+  //     .then((res) => {
+  //       //мы вызываем функции-сеттеры (set...) с помощью новых значений, которые мы получаем из ответа API
+  //       setUserName(res.name);
+  //       setUserDescription(res.about);
+  //       setUserAvatar(res.avatar);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   React.useEffect(() => {
     api
@@ -49,17 +53,17 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             onClick={onEditAvatar}>
             <img
               className="profile__avatar"
-              src={userAvatar}
+              src={currentUser.avatar}
               alt="Аватар пользователя"
             />
           </button>
           <div className="profile__title-block">
-            <h1 className="profile__title overflow">{userName}</h1>
+            <h1 className="profile__title overflow">{currentUser.name}</h1>
             <button
               className="profile__button-edit"
               type="button"
               onClick={onEditProfile}></button>
-            <h2 className="profile__subtitle overflow">{userDescription}</h2>
+            <h2 className="profile__subtitle overflow">{currentUser.about}</h2>
           </div>
         </div>
         <button
