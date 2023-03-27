@@ -15,7 +15,9 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
-  const [currentUser, setCurrentUser] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [cards, setCards] = React.useState([]);
+  // const [isLoading, setIsLoading] = React.useState(false); отслеживаем загрузку карточек
 
   React.useEffect(() => {
     api
@@ -25,6 +27,25 @@ function App() {
       // setCurrentUserDescription(res.about);
       // setCurrentUserAvatar(res.avatar);
 
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    api
+      .getInitialCards()
+      .then((data) => {
+        setCards(
+          data.map((card) => ({
+            _id: card._id,
+            name: card.name,
+            link: card.link,
+            likes: card.likes,
+            owner: card.owner,
+          }))
+        );
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -48,6 +69,27 @@ function App() {
     setSelectedCard({});
   };
 
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
+    console.log(handleCardLike(card));
+  }
+
+  function handleCardDelete(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isOwner = card.owner._id === currentUser._id;
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeDeleteCardStatus(card._id, !isOwner).then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
+  }
+
   return (
     <div className="page">
       <div className="container">
@@ -59,6 +101,9 @@ function App() {
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
             onCardClick={setSelectedCard}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+            cards={cards}
           />
 
           {/* PREVIEW IMAGE POPUP */}

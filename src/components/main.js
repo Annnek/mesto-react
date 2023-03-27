@@ -1,46 +1,21 @@
 import React from "react";
 import "../index.css";
 // import defaultAvatar from "../images/avatarProfile.jpg";
-import api from "../utils/Api.js";
+// import api from "../utils/Api.js";
 import Card from "./Card.js";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  // const [userName, setUserName] = React.useState("Жак-Ив Кусто");
-  // const [userDescription, setUserDescription] =
-  //   React.useState("Путешественник");
-  // const [userAvatar, setUserAvatar] = React.useState(defaultAvatar);
-
-  const [cards, setCards] = React.useState([]);
-  // const [isLoading, setIsLoading] = React.useState(false); отслеживаем загрузку карточек
-
+function Main({
+  cards,
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+}) {
   // Подписываемся на контекст CurrentUserContext
   const currentUser = React.useContext(CurrentUserContext);
-
-  // React.useEffect(() => {
-  //   api
-  //     .getUserInfo()
-  //     .then((res) => {
-  //       //мы вызываем функции-сеттеры (set...) с помощью новых значений, которые мы получаем из ответа API
-  //       setUserName(res.name);
-  //       setUserDescription(res.about);
-  //       setUserAvatar(res.avatar);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  React.useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   //onEditProfile, onAddPlace, onEditAvatar - вызов соответствующих функций из переданных пропсов
   return (
@@ -74,7 +49,13 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       <section className="elements">
         <ul className="card">
           {cards.map((card) => (
-            <Card key={card._id} card={card} onCardClick={onCardClick} />
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />
           ))}
         </ul>
       </section>
