@@ -11,6 +11,9 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
 
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const likeButtonClassName = `card__like-icon ${
+    isLiked ? "card__like-icon_active" : ""
+  }`;
 
   function handleCardClick() {
     onCardClick(card);
@@ -41,9 +44,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
         <div>
           <button
             type="button"
-            className={`card__like-icon ${
-              isLiked ? "card__like-icon_active" : ""
-            }`}
+            className={likeButtonClassName}
             onClick={handleLikeClick}></button>
           <div className="card__like-counter">{card.likes.length}</div>
         </div>

@@ -31,7 +31,7 @@ class Api {
   }
 
   // Метод редактирование профиля
-  async setUserProfile(data) {
+  async setUserInfo(data) {
     const response = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -44,7 +44,7 @@ class Api {
   }
 
   // Метод обновления аватара пользователя
-  async updateUserAvatar(data) {
+  async setUserAvatar(data) {
     const response = await fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
@@ -66,7 +66,7 @@ class Api {
   }
 
   // Метод постановки лайка карточки
-  async setLike(cardId) {
+  async changeLikeCardStatus(cardId) {
     const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
@@ -74,8 +74,16 @@ class Api {
     return this._handleSendingRequest(response);
   }
 
+  // async setLike(cardId) {
+  //   const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+  //     method: "PUT",
+  //     headers: this._headers,
+  //   });
+  //   return this._handleSendingRequest(response);
+  // }
+
   // Метод постановки и снятия лайка с карточки
-  async removeLike(cardId) {
+  async handleCardDelete(cardId) {
     const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
