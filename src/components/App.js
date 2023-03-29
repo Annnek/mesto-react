@@ -30,7 +30,7 @@ function App() {
       .getUserInfo()
       .then((profileInfo) => setCurrentUser(profileInfo))
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка загрузки профиля из api: ${err}`);
       });
   }, []);
 
@@ -49,7 +49,7 @@ function App() {
         );
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка загрузки карточек из api: ${err}`);
       });
   }, []);
 
@@ -109,7 +109,7 @@ function App() {
     const isOwner = card.owner._id === currentUser._id;
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeDeleteCardStatus(card._id, !isOwner).then((newCard) => {
+    api.deleteOwnerCard(card._id, !isOwner).then((newCard) => {
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     });
   }
@@ -122,19 +122,19 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка редактирования профиля: ${err}`);
       });
   }
 
   function handleUpdateAvatar({ avatar }) {
     api
       .setUserAvatar(avatar)
-      .then((userData) => {
-        setCurrentUser(userData);
+      .then((userAvatar) => {
+        setCurrentUser(userAvatar);
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка редактирования аватара профиля: ${err}`);
       });
   }
 
