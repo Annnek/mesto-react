@@ -74,16 +74,8 @@ class Api {
     return this._handleSendingRequest(response);
   }
 
-  // async setLike(cardId) {
-  //   const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-  //     method: "PUT",
-  //     headers: this._headers,
-  //   });
-  //   return this._handleSendingRequest(response);
-  // }
-
-  // Метод постановки и снятия лайка с карточки
-  async handleCardDelete(cardId) {
+  //метод удаления лайка карточки
+  async deleteLikeStatus(cardId) {
     const response = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
@@ -92,7 +84,7 @@ class Api {
   }
 
   // Метод удаления карточки
-  async deleteCard(cardId) {
+  async changeDeleteCardStatus(cardId) {
     const response = await fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,

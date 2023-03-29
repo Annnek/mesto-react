@@ -72,9 +72,32 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    // api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+    //   setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    // });
+    if (isLiked) {
+      api
+        .deleteLikeStatus(card._id)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((item) => (item._id === card._id ? newCard : item))
+          );
+        })
+        .catch((err) => {
+          console.log(`Ошибка при удалении лайка: ${err}`);
+        });
+    } else {
+      api
+        .changeLikeCardStatus(card._id)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((item) => (item._id === card._id ? newCard : item))
+          );
+        })
+        .catch((err) => {
+          console.log(`Ошибка при добавлении лайка: ${err}`);
+        });
+    }
   }
 
   function handleCardDelete(card) {
