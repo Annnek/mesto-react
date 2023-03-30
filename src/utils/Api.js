@@ -49,7 +49,7 @@ class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar,
+        avatar: data,
       }),
     });
     return this._handleSendingRequest(response);
@@ -84,7 +84,7 @@ class Api {
   }
 
   // Метод удаления карточки
-  async changeDeleteCardStatus(cardId) {
+  async deleteOwnerCard(cardId) {
     const response = await fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,

@@ -7,6 +7,7 @@ import Footer from "./footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
+import AddPlacePopup from "./AddPlacePopup.js";
 import ImagePopup from "./ImagePopup.js";
 import api from "../utils/Api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext";
@@ -105,13 +106,12 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isOwner = card.owner._id === currentUser._id;
-
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.deleteOwnerCard(card._id, !isOwner).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .deleteOwnerCard(card._id)
+      .then(() => {
+        setCards((cards) => cards.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => console.log(`Ошибка при удалении карточки: ${err}`));
   }
 
   function handleUpdateUser({ name, about }) {
@@ -135,6 +135,20 @@ function App() {
       })
       .catch((err) => {
         console.log(`Ошибка редактирования аватара профиля: ${err}`);
+      });
+  }
+
+  function handleAddPlaceSubmit(newCard) {
+    console.log("newCard:", newCard);
+    api
+      .addNewCard(newCard)
+      .then((card) => {
+        console.log("card:", card);
+        setCards([card, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка добавления нового места: ${err}`);
       });
   }
 
@@ -172,33 +186,11 @@ function App() {
           />
 
           {/* ADD POPUP */}
-          <PopupWithForm
-            name="add-card"
-            title="Новое место"
-            buttonText="Сохранить"
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}>
-            <input
-              className="popup__input popup__input_type_place"
-              type="text"
-              name="name"
-              id="inputPlace"
-              placeholder="Название"
-              minLength="2"
-              maxLength="30"
-              required
-            />
-            <span className="inputPlace-error popup__input-error"></span>
-            <input
-              className="popup__input popup__input_type_place-link"
-              type="url"
-              name="link"
-              id="inputPlaceLink"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span className="inputPlaceLink-error popup__input-error"></span>
-          </PopupWithForm>
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+          />
 
           {/* DELETE CARD POPUP */}
           <PopupWithForm

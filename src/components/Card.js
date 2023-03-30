@@ -30,7 +30,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   return (
     <li className="card__item">
       <button
-        className={`card__trash ${isOwner ? "card__trash" : ""}`}
+        className={`card__trash ${isOwner ? "card__trash_active" : ""}`}
         type="button"
         onClick={handleDeleteClick}></button>
       <img
