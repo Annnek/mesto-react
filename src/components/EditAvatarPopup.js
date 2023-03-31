@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm.js";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const avatarRef = React.useRef(null); // создание рефа для инпута аватара, записываем объект, возвращаемый хуком, в переменную
+  const avatarRef = useRef(null); // создание рефа для инпута аватара, записываем объект, возвращаемый хуком, в переменную
+
+  useEffect(() => {
+    avatarRef.current.value = "";
+  });
 
   function handleSubmit(e) {
     e.preventDefault();

@@ -1,9 +1,8 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../index.css";
-import Header from "./header.js";
-import Main from "./main.js";
-import Footer from "./footer.js";
+import Header from "./Header.js";
+import Main from "./Main.js";
+import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";

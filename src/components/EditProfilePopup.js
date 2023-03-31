@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PopupWithForm from "./PopupWithForm.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const currentUser = React.useContext(CurrentUserContext);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const currentUser = useContext(CurrentUserContext);
 
   function handleChangeName(e) {
     setName(e.target.value);
@@ -26,12 +26,14 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     });
   }
 
-  // После загрузки текущего пользователя из API
-  // его данные будут использованы в управляемых компонентах.
-  React.useEffect(() => {
+  // После загрузки текущего пользователя из API его данные будут использованы в управляемых компонентах.
+  // Нужно следить за isOpen (за состоянием открытия), чтобы вставлять в инпуты данные пользователя
+  //иначе, если мы удалим информацию из инпутов и просто закроем попап, то при следующем открытии инпуты будут пустые (без данных пользователя)
+  // Это будет своего рода сброс формы
+  useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   return (
     <PopupWithForm

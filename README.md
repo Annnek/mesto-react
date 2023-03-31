@@ -1,10 +1,44 @@
-# Проект Mesto - учебный проект в рамках курса Веб разработчик
+# Mesto вашей мечты
+
+Проектная работа по созданию интерактивного веб-сервиса, который позволяет редактировать данные профиля, загружать собственные изображения, лайкать и удалять их.
 
 Основной стек технологий: HTML + CSS + JS + React + БЭМ
+
+### Подробнее:
+
+- React
+
+  - JSX
+  - хуки useState, useEffect
+  - Контекст
+  - Управляемые компоненты в формах
+  - подключение к серверу в React
+
+- JavaScript
+  - User friendly валидация форм
+  - Разбитие скрипта на модули с классами (ES6)
+- HTML5
+
+- CSS3
+  - Адаптивный пользовательский интерфейс
+  - Flexbox
+  - Grid Layout
+- БЭМ Nested
+- Accessibility
+- Webpack
 
 Результат можно посмотреть по ссылке: https://annnek.github.io/mesto-react/
 
 Предыдущая версия проекта (без реакта) выложена: https://github.com/Annnek/mesto
+
+<!--
+Версии проекта:
+
+Mesto (React, в разработке) ⭐ этот репозиторий
+Mesto (версия classes)
+Mesto (классическая версия на JS)
+
+Технологии -->
 
 <!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
